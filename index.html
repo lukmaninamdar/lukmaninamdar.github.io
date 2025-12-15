@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lukman Inamdar | Portfolio</title>
+  <!-- Ballerina Script (headings, CDN) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+  <link href="https://fonts.cdnfonts.com/css/ballerina-script" rel="stylesheet">
+  <!-- New Berolina font for subtitle -->
+  <link href="https://fonts.cdnfonts.com/css/new-berolina" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <style>
+    :root {
+      --primary: #23355a;
+      --accent: #4ee6eb;
+      --accent2: #f9b17a;
+      --sand: #f5ede5;
+      --glass: rgba(255,255,255,0.88);
+      --heading: 'Ballerina Script', cursive;
+      --body: 'Inter', Arial, sans-serif;
+      --subtitle-font: 'New Berolina', cursive;
+      --rad: 18px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--body);
+      background: linear-gradient(120deg, var(--sand) 58%, #e2e9f5 100%);
+      color: #23355a;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .loader-wrap {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: linear-gradient(120deg, #eaf0fb 60%, #f9b17a 140%);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 99999; transition: opacity .9s;
+    }
+    .loader {
+      width: 72px; height: 72px;
+      border: 7px solid #fff;
+      border-top: 7px solid var(--accent2);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg);} }
+
+    nav {
+      position: fixed; top: 0; left: 0; width: 100vw; z-index: 30;
+      background: rgba(255,255,255,0.98);
+      box-shadow: 0 3px 18px 0 #e2e9f544;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 15px 8vw;
+      border-bottom: 1.1px solid #ecede9;
+      backdrop-filter: blur(12px);
+    }
+    .brand {
+      font-family: var(--heading); font-size: 2.45em; letter-spacing: 3px;
+      color: var(--primary); font-weight: bold;
+      text-shadow: 0 2px 12px #f5ede583;
+    }
+    .brand span { color: var(--accent2);}
+    .nav-links {
+      display: flex; gap: 2em;
+    }
+    .nav-links a {
+      color: #48628b; text-decoration: none; font-weight: 600;
+      font-family: var(--body); letter-spacing: .7px;
+      font-size: 1.1em; padding-bottom: 2px; position: relative;
+      transition: color .19s;
+    }
+    .nav-links a.active, .nav-links a:hover { color: var(--accent2);}
+    .nav-links a::after {
+      content: ''; display: block;
+      width: 0%; height: 2px;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      margin: 0 auto; border-radius: 2.5px;
+      transition: width .29s;
+    }
+    .nav-links a.active::after, .nav-links a:hover::after { width: 100%;}
+    .resume-btn {
+      background: linear-gradient(90deg, var(--accent2) 15%, var(--accent) 90%);
+      color: #fff; border: none; border-radius: 26px; padding: 9px 28px;
+      font-family: var(--body); font-size: 1em; font-weight: 700;
+      box-shadow: 0 7px 24px 0 #f9b17a27;
+      transition: .22s; margin-left: 10px;
+      position: relative; overflow: hidden;
+    }
+    .resume-btn:hover {
+      background: linear-gradient(90deg, var(--accent) 40%, var(--accent2) 100%);
+      color: var(--primary);
+    }
+    .nav-links a, .resume-btn { outline: none; }
+
+    /* Hero */
+    .hero {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      padding: 16vh 8vw 4vw 8vw; min-height: 86vh; position: relative; z-index: 1;
+      background: linear-gradient(130deg, #f6f2eecc 77%, #e2e9f5 100%);
+      overflow-x: hidden;
+    }
+    .intro {
+      flex: 1; max-width: 530px; min-width: 230px; z-index: 2;
+    }
+    .intro h1 {
+      font-family: var(--heading); font-size: 3.3em;
+      color: var(--primary); margin-bottom: 0.19em;
+      letter-spacing: 2px; line-height: 1.0;
+      font-weight: bold; text-shadow: 0 3px 28px #f9b17a22;
+    }
+    .intro .title {
+      font-family: var(--subtitle-font);
+      font-size: 1.38em; color: var(--accent2); margin-bottom: 1.08em;
+      line-height: 1.35; letter-spacing: 2.5px;
+      text-shadow: 0 2px 20px #ede2c7a1;
+      font-weight: bold;
+    }
+    .intro .desc {
+      color: #364661; font-size: 1.14em; font-family: var(--body);
+      margin-bottom: 2.1em; line-height: 1.7; letter-spacing: .11px;
+    }
+    .social {
+      display: flex; gap: 1.45em; margin-top: 12px;
+    }
+    .social a {
+      color: var(--accent2); font-size: 2.1em; background: var(--glass);
+      border-radius: 50%; padding: 10px; transition: background .15s, color .19s;
+      border: 2.1px solid #f9b17a19; box-shadow: 0 2px 11px #4ee6eb31;
+    }
+    .social a:hover { color: #fff; background: var(--accent2);}
+    .hero-image-wrap {
+      flex-basis: 402px; display: flex; align-items: center; justify-content: center;
+      min-width: 130px; min-height: 332px; position: relative; z-index: 2;
+    }
+    .avatar-glass {
+      width: 270px; height: 270px;
+      border-radius: 34% 49% 44% 56%/54% 41% 59% 46%;
+      background: var(--glass);
+      box-shadow: 0 9px 34px #48628b38;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+      border: 2.7px solid #f9b17a2b; animation: floatPic 8s ease-in-out infinite;
+      position: relative; z-index: 2;
+    }
+    @keyframes floatPic { 0%,100%{transform:translateY(0);}40%{transform:translateY(13px);} }
+    .avatar-glass img {
+      width: 100%; height: 100%; object-fit: cover; border-radius: inherit;
+      filter: saturate(1.13) contrast(1.03) brightness(1.10);
+    }
+    /* Parallax soft bg shapes */
+    .shape-float {
+      position: absolute; z-index: 1; filter: blur(10px);
+      opacity: .12; pointer-events: none; animation: shapeMove 18s infinite alternate;
+    }
+    .shape-float.s1 { top: -80px; left: 2vw; width: 170px; animation-delay: 0s;}
+    .shape-float.s2 { bottom: -70px; right: 5vw; width: 210px; animation-delay: .9s;}
+    @keyframes shapeMove {0%{transform:rotate(-20deg);}100%{transform:rotate(30deg) scale(1.17);}}
+
+    section { padding: 6vw 8vw 4vw 8vw; position: relative; z-index: 2;}
+    .section-title {
+      font-family: var(--heading); font-size: 2.25em; color: var(--primary);
+      margin-bottom: .8em; font-weight: 700; letter-spacing: 2.7px;
+      display: inline-block; background: rgb(255,255,255,0.7);
+      padding: .26em 1.3em; border-radius: 13px;
+      box-shadow: 0 2px 13px #f9b17a11;
+    }
+    .svg-divider {
+      width: 100vw; height: 54px; display: block; line-height: 0;
+      pointer-events: none; margin-top: -2vw; margin-bottom: -1vw;
+      position: relative; z-index: 1;
+    }
+    /* About */
+    .about-content {
+      display: flex; flex-wrap: wrap; gap: 4vw; align-items: center;
+    }
+    .about-text {
+      flex: 2; font-size: 1.11em; background: var(--glass);
+      border-radius: var(--rad); box-shadow: 0 4px 10px #f9b17a17;
+      padding: 2em 2.2em; min-width: 210px; color: #364661;
+      font-weight: 500; letter-spacing: .13px; border: 1.3px solid #ffeedebc;
+      font-family: var(--body);
+    }
+    .about-sideicon {
+      flex: 1; text-align: center; font-size: 4.2em;
+      color: var(--accent2); padding-top: 10px; opacity: .83;
+      text-shadow: 0 3px 16px #f9b17a26;
+    }
+    /* Skills */
+    .skills-list {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5em; margin-top: 2vw;
+    }
+    .skill-card {
+      background: var(--glass); color: var(--primary);
+      border-radius: 14px; border: 1.2px solid #f9b17a19;
+      padding: 1em 1em 1em 1em; font-size: 1.08em; font-family: var(--body); font-weight: 600;
+      box-shadow: 0 4px 24px 0 #4ee6eb31; text-align: center;
+      transition: .15s; position: relative; overflow: hidden;
+      display: flex; align-items: center; gap: .6em; justify-content: center;
+    }
+    .skill-card i { font-size: 1.25em; color: var(--accent); }
+    .skill-card:hover { background: #f9b17a23; color: var(--accent); box-shadow: 0 9px 32px 0 var(--accent2); transform: scale(1.04);}
+    /* Projects */
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 2vw; margin-top: 2.2vw;
+    }
+    .project-card {
+      background: var(--glass); border: 1.2px solid #ffeedeba;
+      border-radius: 22px; box-shadow: 0 7px 32px 0 #f9b17a30;
+      padding: 2em 2em 1.2em 2em; color: #2b3a54;
+      transition: .16s; overflow: hidden; display: flex;
+      flex-direction: column; align-items: flex-start; min-height: 180px; position: relative;
+    }
+    .project-card:hover { box-shadow: 0 13px 28px var(--accent2); background: #fff7f0; color: var(--primary);}
+    .project-icon { font-size: 2.11em; color: var(--accent2); margin-bottom: .3em;
+      filter: drop-shadow(0 1px 9px #4ee6eb6a);
+    }
+    .project-title {
+      font-family: var(--heading); font-size: 1.22em; color: var(--accent);
+      margin-bottom: .24em; font-weight: 700; letter-spacing: 2px;
+    }
+    .project-card.project-portfolio {
+      border-color: #4ee6eb80;
+      box-shadow: 0 7px 26px 0 #4ee6eb33;
+    }
+    .project-card.project-portfolio:hover {
+      box-shadow: 0 15px 38px 0 #4ee6eb81;
+      background: #e4f7f9;
+      color: var(--accent);
+    }
+    /* Contact */
+    .contact-grid { display: flex; flex-wrap: wrap; gap: 3vw; align-items: center;}
+    .contact-form {
+      flex: 2; background: var(--glass); border-radius: var(--rad);
+      border: 1.1px solid #f9b17a2e; padding: 2em 2em; min-width: 220px;
+      box-shadow: 0 7px 20px 0 #f9b17a21;
+    }
+    .contact-form label { display: block; margin-bottom: 7px; color: var(--primary); font-weight: 700; font-size: 1.05em;}
+    .contact-form input, .contact-form textarea {
+      background: #faf7f1; color: #2b3642; border: none; border-radius: 8px;
+      width: 100%; padding: .82em 1em; margin-bottom: 13px; font-size: 1em; font-family: var(--body);
+      box-shadow: 0 2px 8px #f9b17a59; outline: none; border: 1px solid #f9b17a11;
+      transition: .16s;
+    }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent);}
+    .contact-form button {
+      background: linear-gradient(90deg, var(--accent2) 30%, var(--accent) 100%);
+      border: none; color: #fff; border-radius: 14px;
+      font-family: var(--body); font-size: 1.1em; padding: .6em 2.2em;
+      cursor: pointer; transition: .16s; margin-top: .2em;
+      box-shadow: 0 2px 13px 0 #f9b17a20; font-weight: 700; position: relative;
+    }
+    .contact-form button:hover { background: var(--accent2); color: #fff;}
+    .contact-social {
+      flex: 1; display: flex; flex-direction: column; align-items: center; gap: 1em;
+      justify-content: center; min-width: 120px;
+    }
+    .contact-social a {
+      color: var(--accent2); font-size: 2em; transition: color .12s, background .12s, transform .11s;
+      background: #fff6ed; border-radius: 50%; padding: 9px;
+      box-shadow: 0 2px 8px #4ee6eb45;
+    }
+    .contact-social a:hover { color: #fff; background: var(--accent2); transform: scale(1.11);}
+    .fade-in { opacity: 0; transform: translateY(36px) scale(.97);}
+    .fade-in.visible { opacity: 1; transform: translateY(0) scale(1); transition: .73s cubic-bezier(.32,1.52,.27,1);}
+    #topBtn {
+      position: fixed; bottom: 35px; right: 24px; z-index: 120;
+      background: linear-gradient(90deg, var(--accent2) 22%, var(--accent) 98%);
+      color: #fff; border: none; border-radius: 50%; width: 46px; height: 46px;
+      box-shadow: 0 5px 18px 0 #f9b17adc;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.59em; cursor: pointer; opacity: 0; pointer-events: none; transition: .32s;
+    }
+    #topBtn.visible { opacity: 1; pointer-events: auto; }
+
+    footer {
+      width: 100%; padding: 1.6em 0 .8em 0; background: #fff7f0fa;
+      color: var(--primary); display: flex; flex-direction: column; align-items: center;
+      border-top: 1.2px solid #f9b17a56; font-family: var(--body); font-size: 1.09em;
+      margin-top: 3vw; box-shadow: 0 1px 15px #eae2fb22;
+    }
+    .footer-links { margin-bottom: 8px;}
+    .footer-links a {
+      color: var(--accent2); margin: 0 1em; font-size: 1.1em; transition: .1s;
+      background: #f9e6da; border-radius: 50%; padding: 9px;
+    }
+    .footer-links a:hover { color: #fff; background: var(--accent);}
+    .fixed-social {
+      display: none; position: fixed; left: 33px; top: 46vh; flex-direction: column; gap: 17px; z-index: 24;
+    }
+    .fixed-social a { color: var(--accent2); font-size: 1.35em; transition: .18s;}
+    .fixed-social a:hover { color: var(--accent);}
+    @media (min-width:1240px){ .fixed-social{display:flex;}}
+    @media (max-width:950px) {
+      .hero{flex-direction:column;gap:4vw;}
+      .hero-image-wrap{margin-top:3vw;}
+      .skills-list{grid-template-columns:repeat(2,1fr);}
+      .about-content{flex-direction:column;}
+      .contact-grid{flex-direction:column;}
+      nav{padding:13px 2vw;}
+    }
+    @media (max-width:650px){
+      .hero-image-wrap{min-width:115px;height:150px;}
+      .avatar-glass{width:126px;height:126px;}
+      .skills-list{grid-template-columns:1fr;}
+      .section-title{font-size:1.2em;}
+      .brand{font-size:1.1em;}
+      .fixed-social{left:8px;}
+    }
+    ::selection { background: var(--accent2); color: #fff;}
+    ::-webkit-scrollbar { width: 7px; background: #f9e6da37;}
+    ::-webkit-scrollbar-thumb { background: linear-gradient(90deg, var(--accent2) 10%, var(--accent) 90%); border-radius: 6px;}
+  </style>
+</head>
+<body>
+<!-- Loader -->
+<div class="loader-wrap" id="loader">
+  <div class="loader"></div>
+</div>
+<!-- Nav -->
+<nav>
+  <div class="brand">Lukman<span>Inamdar</span></div>
+  <div class="nav-links">
+    <a href="#about" class="active">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+    <!-- Resume now links to .jpg file -->
+    <a href="Lukman's Resume.pdf" class="resume-btn" target="_blank">Resume</a>
+  </div>
+</nav>
+<!-- Social bar (desktop) -->
+<div class="fixed-social">
+  <a href="mailto:inamdarlukman2004@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+  <a href="https://github.com/lukmaninamdar" target="_blank"><i class="fab fa-github"></i></a>
+  <a href="https://www.linkedin.com/in/lukman-inamdar" target="_blank"><i class="fab fa-linkedin"></i></a>
+  <a href="https://www.instagram.com/lukman_inamdar/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+  <a href="https://www.youtube.com/@lukmaninamdar" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+  <a href="https://wa.me/918975367215?text=Hey%20I'm%20Visitor%20on%20your%20Webpage%F0%9F%98%81" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+</div>
+<!-- Hero -->
+<section class="hero" id="hero">
+  <div class="intro">
+    <h1>Lukman Inamdar</h1>
+    <div class="title">Full Stack Developer • Modern App Developer • Cloud & DevOps Enthusiast</div>
+    <div class="desc">
+      <span style="color:var(--accent2);font-weight:bold;">Bachelor's in Computer Science</span> graduate who crafts beautiful, robust, and user-first digital solutions.<br>
+      Specializing in high-end web and mobile development—delivering impact with code <b>and</b> creativity.
+    </div>
+    <div class="social">
+      <a href="mailto:inamdarlukman2004@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://github.com/lukmaninamdar" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/lukman-inamdar" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.instagram.com/lukman_inamdar/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.youtube.com/@lukmaninamdar" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="https://wa.me/918975367215?text=Hey%20I'm%20Visitor%20on%20your%20Webpage%F0%9F%98%81" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+  </div>
+  <div class="hero-image-wrap">
+    <div class="avatar-glass">
+      <!-- Swap the image link below for your real/futuristic avatar! -->
+      <img src="Lukman-photo.jpg" alt="Avatar"/>
+    </div>
+  </div>
+  <!-- floating designer shapes -->
+  <svg class="shape-float s1" viewBox="0 0 410 210"><ellipse cx="205" cy="105" rx="195" ry="95" fill="#4ee6eb"/></svg>
+  <svg class="shape-float s2" viewBox="0 0 300 180"><ellipse cx="150" cy="90" rx="134" ry="72" fill="#f9b17a"/></svg>
+</section>
+<div class="svg-divider">
+  <svg viewBox="0 0 1440 64" width="100%" height="64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,26 C400,108 1100,-35 1440,36 L1440,64 L0,64Z" fill="#edf2fa"/>
+  </svg>
+</div>
+<section id="about">
+  <span class="section-title">About Me</span>
+  <div class="about-content">
+    <div class="about-text fade-in">
+      🚀 I'm a future-ready Computer Engineer with a deep passion for turning bold ideas into high-impact digital solutions. Blending creativity with code, I build scalable Android apps and web experiences using Java, Kotlin, HTML, CSS, JavaScript, and Firebase — always focused on performance, design, and real-world usability. Certified in Software Testing, Git & GitHub, and Android Development, I’m well-versed in building clean architectures and intuitive UI/UX. I constantly explore AI integrations and automation to stay ahead of the curve. Multilingual, fast-learning, and sharply detail-oriented — I don’t just adapt to technology, I evolve with it. I’m not here to follow trends. I’m here to set them.
+    </div>
+    <div class="about-sideicon"><i class="fas fa-award"></i></div>
+  </div>
+</section>
+<div class="svg-divider">
+  <svg viewBox="0 0 1440 64" width="100%" height="64" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,36 C400,-20 1200,92 1440,36 L1440,64 L0,64Z" fill="#fff6ed"/>
+  </svg>
+</div>
+<section id="skills">
+  <span class="section-title">Skills & Tools</span>
+  <div class="skills-list fade-in">
+    <div class="skill-card"><i class="fab fa-html5"></i> HTML / CSS / JS</div>
+    <div class="skill-card"><i class="fas fa-cloud"></i> Cloud-Based Deployment</div>
+    <div class="skill-card"><i class="fas fa-robot"></i> AI-Based Integrations & Automation Tools</div>
+    <div class="skill-card"><i class="fas fa-fire"></i> Firebase (Auth, Database, Storage)</div>
+    <div class="skill-card"><i class="fas fa-cubes"></i> Microservices Architecture</div>
+    <div class="skill-card"><i class="fab fa-docker"></i> Docker / Kubernetes</div>
+    <div class="skill-card"><i class="fas fa-code"></i> VS Code / DevTools</div>
+    <div class="skill-card"><i class="fab fa-git-alt"></i> Git & GitHub / Netlify</div>
+    <div class="skill-card"><i class="fab fa-aws"></i> AWS / Azure</div>
+  </div>
+</section>
+
+<section id="projects">
+  <span class="section-title">Projects</span>
+  <div class="projects-grid fade-in">
+    <div class="project-card">
+      <div class="project-icon"><i class="fas fa-mosque"></i></div>
+      <div class="project-title">Islamic All-in-One App</div>
+      <div>Flutter app with Quran, Prayer Times, Qibla, Tasbeeh & more, powered by Firebase backend.</div>
+    </div>
+    <div class="project-card">
+      <div class="project-icon"><i class="fas fa-calendar-check"></i></div>
+      <div class="project-title">Event Vendor System</div>
+      <div>Full platform for event vendors & clients: secure login, bookings & powerful dashboards.</div>
+    </div>
+    <div class="project-card">
+      <div class="project-icon"><i class="fas fa-tint"></i></div>
+      <div class="project-title">Blood Bank & Donor Management</div>
+      <div>Modern blood bank management: donor, inventory, and emergency requests simplified.</div>
+    </div>
+    <div class="project-card project-portfolio">
+      <div class="project-icon"><i class="fas fa-file-code"></i></div>
+      <div class="project-title">Personal Portfolio Website</div>
+      <div>A sleek, modern full-stack portfolio website showcasing projects, skills, and contact—built with cutting-edge web technologies and designed for professional impact and responsiveness.</div>
+    </div>
+  </div>
+</section>
+<section id="contact">
+  <span class="section-title">Contact</span>
+  <div class="contact-grid">
+    <form class="contact-form fade-in" id="contactForm">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="Name" required>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="Email" required>
+      <label for="message">Message</label>
+      <textarea id="message" name="Message" rows="4" required></textarea>
+      <button type="submit"><i class="fas fa-paper-plane"></i> Send</button>
+    </form>
+    <div class="contact-social">
+      <a href="mailto:inamdarlukman2004@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://github.com/lukmaninamdar" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/lukman-inamdar" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.instagram.com/lukman_inamdar/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.youtube.com/@lukmaninamdar" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="https://wa.me/918975367215?text=Hey%20I'm%20Visitor%20on%20your%20Webpage%F0%9F%98%81" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    </div>
+  </div>
+</section>
+<button id="topBtn" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
+<footer>
+  <div class="footer-links">
+    <a href="mailto:inamdarlukman2004@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+    <a href="https://github.com/lukmaninamdar" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/lukman-inamdar" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://www.instagram.com/lukman_inamdar/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="https://www.youtube.com/@lukmaninamdar" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+    <a href="https://wa.me/918975367215?text=Hey%20I'm%20Visitor%20on%20your%20Webpage%F0%9F%98%81" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+  </div>
+  <small>© 2025 Lukman Inamdar. Designed for impact.</small>
+</footer>
+<script>
+  // Loader
+  window.onload = function() {
+    setTimeout(()=> {
+      document.getElementById('loader').style.opacity=0;
+      setTimeout(()=>{document.getElementById('loader').remove();},700);
+    }, 1000);
+  };
+  const topBtn = document.getElementById('topBtn');
+  window.onscroll = function(){
+    if(window.scrollY>250){topBtn.classList.add('visible');}
+    else{topBtn.classList.remove('visible');}
+    document.querySelectorAll('.nav-links a').forEach(link=>link.classList.remove('active'));
+    let id = '';
+    ['about','skills','projects','contact'].forEach(sec=>{
+      let secEl = document.getElementById(sec);
+      if(secEl && window.scrollY + 130 >= secEl.offsetTop){id=sec;}
+    });
+    if(id){
+      let active = document.querySelector(`.nav-links a[href="#${id}"]`);
+      if(active)active.classList.add('active');
+    } else { document.querySelector('.nav-links a[href="#about"]').classList.add('active'); }
+  }
+  topBtn.onclick=()=>{window.scrollTo({top:0,left:0,behavior:'smooth'});}
+  document.querySelectorAll('.fade-in').forEach(fader=>{
+    new IntersectionObserver((entries,ob)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          ob.unobserve(entry.target);
+        }
+      });
+    },{threshold:.13}).observe(fader);
+  });
+  document.querySelectorAll('nav .nav-links a[href^="#"]').forEach(link=>{
+    link.addEventListener('click',function(e){
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+    });
+  });
+
+  // Handle Contact Form Submission for WhatsApp
+  document.getElementById('contactForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      // Get form field values
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      // Construct the WhatsApp message with URL encoding
+      const whatsappMessage = `Hey I'm a visitor from your portfolio! 😄\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`;
+      const encodedMessage = encodeURIComponent(whatsappMessage);
+      const whatsappUrl = `https://wa.me/918975367215?text=${encodedMessage}`;
+
+      // Open WhatsApp in a new tab
+      window.open(whatsappUrl, '_blank');
+  });
+</script>
+</body>
+</html>
