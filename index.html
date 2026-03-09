@@ -311,6 +311,61 @@
     ::selection { background: var(--accent2); color: #fff;}
     ::-webkit-scrollbar { width: 7px; background: #f9e6da37;}
     ::-webkit-scrollbar-thumb { background: linear-gradient(90deg, var(--accent2) 10%, var(--accent) 90%); border-radius: 6px;}
+<!-- Extra Hover + Click Badge for Projects -->
+<style>
+/* Clickable badge top-right corner */
+.project-card .click-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ff6f61;  /* stylish orange */
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: opacity 0.3s ease, background 0.3s ease;
+}
+
+/* Hover effect for card */
+.project-card:hover {
+  transform: scale(1.04);  /* slight zoom */
+  box-shadow: 0 15px 38px rgba(78, 230, 235, 0.5);  /* glow effect */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.project-card .click-badge:hover {
+  background-color: #ff9472;  /* badge hover color change */
+  box-shadow: 0 4px 12px rgba(255,111,97,0.5);
+}
+<style>
+/* Projects button aesthetic */
+.project-card .visit-btn {
+  margin-top: 14px;
+  display: inline-block;
+  padding: 8px 16px;
+  background: linear-gradient(90deg, #4ee6eb 20%, #f9b17a 90%);
+  color: #fff;
+  font-weight: 600;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 0.95em;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 5px 18px rgba(249,177,122,0.4);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.project-card .visit-btn:hover {
+  background: linear-gradient(90deg, #f9b17a 20%, #4ee6eb 90%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(78,230,235,0.5);
+}
+</style>
+</style>
   </style>
 </head>
 <body>
@@ -407,7 +462,7 @@
     <div class="project-card">
       <div class="project-icon"><i class="fas fa-mosque"></i></div>
       <div class="project-title">Islamic All-in-One App</div>
-      <div>Flutter app with Quran, Prayer Times, Qibla, Tasbeeh & more, powered by Firebase backend.</div>
+      <div>An Android app featuring Quran, Prayer Times, Qibla, and Tasbeeh with a clean UI and smooth user experience.</div>
     </div>
     <div class="project-card">
       <div class="project-icon"><i class="fas fa-calendar-check"></i></div>
@@ -419,12 +474,25 @@
       <div class="project-title">Blood Bank & Donor Management</div>
       <div>Modern blood bank management: donor, inventory, and emergency requests simplified.</div>
     </div>
-    <div class="project-card project-portfolio">
-      <div class="project-icon"><i class="fas fa-file-code"></i></div>
-      <div class="project-title">Personal Portfolio Website</div>
-      <div>A sleek, modern full-stack portfolio website showcasing projects, skills, and contact—built with cutting-edge web technologies and designed for professional impact and responsiveness.</div>
-    </div>
+ <!-- Personal Portfolio Website -->
+<div class="project-card project-portfolio">
+  <div class="project-icon"><i class="fas fa-file-code"></i></div>
+  <div class="project-title">Personal Portfolio Website</div>
+  <div>
+    A sleek, modern full-stack portfolio website showcasing projects, skills, and contact—built with cutting-edge web technologies and designed for professional impact and responsiveness.
   </div>
+  <a href="https://lukmaninamdar.github.io/" target="_blank" class="visit-btn">Click to Visit</a>
+</div>
+
+<!-- All In One Solapur -->
+<div class="project-card">
+  <div class="project-icon"><i class="fas fa-city"></i></div>
+  <div class="project-title">All In One Solapur – Premium City Services Platform</div>
+  <div>
+    A smart city services platform unifying local businesses and event solutions into one seamless and scalable digital experience, trusted and used by thousands of users.
+  </div>
+  <a href="https://lukmaninamdar.github.io/all_in_one_solapur/" target="_blank" class="visit-btn">Click to Visit</a>
+</div>
 </section>
 <section id="contact">
   <span class="section-title">Contact</span>
